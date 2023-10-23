@@ -26,6 +26,7 @@ function newForm() {
     title.setAttribute("name", "title");
     title.setAttribute("id", "title");
     title.setAttribute("placeholder", "A Game of Thrones");
+    title.setAttribute("required", "");
 
     // Input element for author
     const authorLabel = document.createElement("label");
@@ -36,6 +37,7 @@ function newForm() {
     author.setAttribute("name", "author");
     author.setAttribute("id", "author");
     author.setAttribute("placeholder", "George R. R. Martin");
+    author.setAttribute("required", "");
 
     // Input element for numberPage
     const numberPageLabel = document.createElement("label");
@@ -46,6 +48,7 @@ function newForm() {
     numberPage.setAttribute("name", "numberPage");
     numberPage.setAttribute("id", "numberPage");
     numberPage.setAttribute("placeholder", "500");
+    numberPage.setAttribute("required", "");
 
     // Input element for read
     const readLabel = document.createElement("label");
@@ -55,30 +58,46 @@ function newForm() {
     read.setAttribute("type", "checkbox");
     read.setAttribute("name", "read");
     read.setAttribute("id", "read");
+    read.setAttribute("required", "");
 
     // Create a submit button
     const submitButton = document.createElement("input");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Submit");
+    submitButton.setAttribute("id", "submitButton");
+
+    // Create a close button
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "Close";
+    closeButton.className = "closeButton";
+
+    const container = document.createElement("div");
+    container.className = "container";
+    form.appendChild(container);
+
+    const buttons = document.createElement("div");
+    buttons.className = "buttons"
+    form.appendChild(buttons);
 
     // Append labels and inputs to the form
-    form.appendChild(titleLabel);
-    form.appendChild(title);
-    form.appendChild(br); // Add a line break
-    form.appendChild(authorLabel);
-    form.appendChild(author);
-    form.appendChild(br); // Add a line break
-    form.appendChild(numberPageLabel);
-    form.appendChild(numberPage);
-    form.appendChild(br); // Add a line break
-    form.appendChild(readLabel);
-    form.appendChild(read);
-    form.appendChild(br); // Add a line break
-    form.appendChild(submitButton);
+    container.appendChild(titleLabel);
+    container.appendChild(title);
+    container.appendChild(br); // Add a line break
+    container.appendChild(authorLabel);
+    container.appendChild(author);
+    container.appendChild(br); // Add a line break
+    container.appendChild(numberPageLabel);
+    container.appendChild(numberPage);
+    container.appendChild(br); // Add a line break
+    container.appendChild(readLabel);
+    container.appendChild(read);
+    container.appendChild(br); // Add a line break
+    buttons.appendChild(submitButton);
+    buttons.appendChild(closeButton);
 
     // Append the form to the "library" element
     body.appendChild(form);
-
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
     
@@ -110,6 +129,17 @@ function newForm() {
         //display the book
         displayBook(book);
 
+        button.disabled = false;
+    })
+
+    //taking the query of the botton created 
+    const buttonClose = form.querySelector('button')
+
+    buttonClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log("sono dentro");
+
+        form.remove();
         button.disabled = false;
     })
 }
